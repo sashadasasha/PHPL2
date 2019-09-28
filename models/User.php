@@ -8,6 +8,7 @@ class User extends Model
     public $login;
     public $pass;
 
+
     public function __construct($id = null, $login = null, $pass = null) {
        
         $this->id = $id;
@@ -15,6 +16,7 @@ class User extends Model
         $this->pass = $pass;
     }
     public static function getTableName() {
+
         return 'users';
     }
 

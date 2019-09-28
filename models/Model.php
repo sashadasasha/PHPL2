@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+
 use app\interfaces\IModel;
 use app\engine\Db;
 
@@ -44,6 +45,7 @@ abstract class Model implements IModel
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
         return Db::getInstance()->queryAll($sql);
+
     }
 
 }

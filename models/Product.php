@@ -5,9 +5,12 @@ namespace app\models;
 class Product extends Model
 {
     public $id;
+
+
     public $name;
     public $description;
     public $price;
+
 
     public function __construct($id = null, $name = null, $description = null, $price = null) {
        
@@ -20,8 +23,5 @@ class Product extends Model
     {
         return 'products';
     }
-
-
-
 
 }

@@ -2,6 +2,7 @@
 
 namespace app\engine;
 
+
 use app\traits\Tsingletone;
 
 class Db
@@ -67,6 +68,7 @@ class Db
 
     public function lastInsertId() {
         return $this->connection->lastInsertId();
+
     }
 
 }

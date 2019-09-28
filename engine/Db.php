@@ -1,7 +1,7 @@
+
 <?php
 
 namespace app\engine;
-
 
 use app\traits\Tsingletone;
 
@@ -22,7 +22,6 @@ class Db
 
     private function getConnection() {
         if (is_null($this->connection)) {
-            var_dump("Подключаюсь к БД...");
             $this->connection =  new \PDO($this->prepareDSNstring(),
                 $this->config['login'],
                 $this->config['password']);
@@ -47,17 +46,17 @@ class Db
         return $pdoStatement;
     }
 
-    public function execute($sql, $params = []) {
-        $this->query($sql, $params);
-        return true;
-    }
-
     public function queryObject($sql, $params, $class) {
         $pdoStatement = $this->query($sql, $params);
         $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
         return $pdoStatement->fetch();
     }
-    
+
+    public function execute($sql, $params = []) {
+        $this->query($sql, $params);
+        return true;
+    }
+
     public function queryOne($sql, $params = []) {
         return $this->queryAll($sql, $params)[0];
     }
@@ -68,7 +67,7 @@ class Db
 
     public function lastInsertId() {
         return $this->connection->lastInsertId();
-
     }
+
 
 }

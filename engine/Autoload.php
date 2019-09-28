@@ -1,9 +1,8 @@
+
 <?php
 
 class Autoload
 {
-
-
 
     public function loadClass($className)
     {

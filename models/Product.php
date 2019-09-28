@@ -63,7 +63,4 @@ class Product extends DbModel
         return 'products';
     }
 
-
-
-
 }

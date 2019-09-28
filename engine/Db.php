@@ -1,3 +1,4 @@
+
 <?php
 
 namespace app\engine;
@@ -67,5 +68,6 @@ class Db
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }
+
 
 }

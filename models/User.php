@@ -12,5 +12,4 @@ class User extends DbModel
         return 'users';
     }
 
-
 }

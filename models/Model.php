@@ -1,25 +1,51 @@
 <?php
 namespace app\models;
+
+
 use app\interfaces\IModel;
 use app\engine\Db;
 
-abstract class Model implements IModel {
-    
-    protected $db;
+abstract class Model implements IModel
+{
 
-    public function __construct(Db $db) {
-        $this->db = $db;
+    public function insert() {
+        $tableName = $this->getTableName();
+        foreach ($this as $key => $value) {
+            if ($key !== "id" && $key !== "db") {
+            $fields[] = "'$key'";
+            $values[":{$key}"] = $value;
+            }
+        }  
+        $fields = implode(", ",$fields);  
+        $params = implode(", ",array_keys($values));
+            
+        $sql = "INSERT INTO {$tableName} ({$fields}) VALUES ({$params})";
+        var_dump($sql);
+        Db::getInstance()->execute($sql, $values);
+        
+   
     }
 
-    public function getOne($id) {
-        $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE id = {$id}";
-        return $this->db->queryOne($sql);
+    public function delete() {
+        $tableName = static::getTableName();
+        $sql = "DELETE * FROM {$tableName} WHERE id = :id";
+        var_dump($sql);
+        return Db::getInstance()->execute($sql, ['id' => $this->id]);
     }
-    public function getAll() {
-        $tableName = $this->getTableName();
+    public function update() {
+
+    }
+
+    public static function getOne($id) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE id = :id";
+        return Db::getInstance()->queryObject($sql, ['id' => $id], static::class);
+    }
+    public static function getAll() {
+        $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryAll($sql);
+        return Db::getInstance()->queryAll($sql);
+
     }
 
 }

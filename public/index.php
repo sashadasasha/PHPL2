@@ -38,6 +38,8 @@ if (empty($controllerUrl)) {
 //var_dump($controllerClass);
 
 
+$db = mysqli_connect('localhost:8098', 'root', 'root', 'shop');
+var_dump($db);
 
 
 

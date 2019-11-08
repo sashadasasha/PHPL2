@@ -10,9 +10,9 @@ class Db
 
     private $config = [
         'driver' => 'mysql',
-        'host' => 'localhost',
+        'host' => 'localhost:8098',
         'login' => 'root',
-        'password' => '',
+        'password' => 'root',
         'database' => 'shop',
         'charset' => 'utf8'
     ];
@@ -27,6 +27,7 @@ class Db
                 $this->config['login'],
                 $this->config['password']
             );
+            //var_dump($this->connection);
             $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         }
         return $this->connection;

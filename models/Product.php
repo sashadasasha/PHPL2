@@ -4,13 +4,13 @@ namespace app\models;
 
 class Product extends DbModel
 {
-    public $id;
-    public $name;
-    public $description;
-    public $price;
-    public $image;
+    protected $id;
+    protected $name;
+    protected $description;
+    protected $price;
+    protected $image;
 
-    public $props = ['name', 'description', 'price', 'image'];
+    protected $props = ['name', 'description', 'price', 'image'];
 
     public function __construct($name="", $description = "", $price = null, $image = "") 
     {
@@ -23,6 +23,14 @@ class Product extends DbModel
    public static function getTableName()
    {
         return "products";
+   }
+
+   public function getProperties()
+   {
+       return (object) array("name" => $this->name,
+                            "description" => $this->description,
+                            "price" => $this->price,
+                            "image" => $this->image);
    }
 
 }

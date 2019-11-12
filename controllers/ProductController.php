@@ -28,8 +28,11 @@ public function actionApiCatalog()
 
 public function actionItem() 
   {
-    $id = static::getUrl()[2];
+    $id = $this->getUrl()[2];
+    //var_dump($id);
     $product = Product::getOne($id);
+    $product = $product->getProperties();
+    //var_dump($product);
     echo $this->render('item', ['product' => $product]);
   }
 }

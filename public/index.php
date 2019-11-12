@@ -10,16 +10,17 @@ include realpath("../engine/Autoload.php");
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-// $url = explode('/', $_SERVER['REQUEST_URI']);
+$url = explode('/', $_SERVER['REQUEST_URI']);
 // var_dump($url);
 // $controllerName = $_GET['c']? : 'product';
 // $action = $_GET['a'];
 
-$controllerUrl = CoreController::getUrl();
-//var_dump($controller);
+$controllerEx = new CoreController();
+$controllerUrl = $controllerEx->getUrl();
+//var_dump($controllerUrl);
 if (empty($controllerUrl)) {
-  //var_dump($controller);
-  CoreController::actionIndex();
+  var_dump($controllerEx);
+  $controllerEx->actionIndex();
 } else {
   $controllerName = $controllerUrl[0];
   $controllerAction = $controllerUrl[1];
@@ -37,9 +38,15 @@ if (empty($controllerUrl)) {
 //$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 //var_dump($controllerClass);
 
+// $db = mysqli_connect('127.0.0.1:3306', 
+// 'root', 
+// 'root', 
+// 'shop');
+// var_dump($db);
+// // 
 
-$db = mysqli_connect('localhost:8098', 'root', 'root', 'shop');
-var_dump($db);
+
+
 
 
 

@@ -10,15 +10,15 @@ class Db
 
     private $config = [
         'driver' => 'mysql',
-        'host' => 'localhost:8098',
+        'host' => 'mysql',
         'login' => 'root',
         'password' => 'root',
         'database' => 'shop',
-        'charset' => 'utf8'
+        'charset' => 'utf8',
+       // 'port' => '33061'
     ];
 
     private $connection = null;
-
 
     protected function getConnection() 
     {
@@ -62,6 +62,7 @@ class Db
             $this->config['host'],
             $this->config['database'],
             $this->config['charset']
+            //$this->config['port']
         );
     }
 

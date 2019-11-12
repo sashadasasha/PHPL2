@@ -13,7 +13,8 @@ class Basket extends DbModel
         return "basket";
     }
 
-    public static function addToBasket($id) {
+    public static function addToBasket($id) 
+    {
             $id = (int)$id;
             $session_id = session_id();
             $tableName = static::getTableName();
@@ -25,4 +26,16 @@ class Basket extends DbModel
             var_dump($sql);
             return Db::getInstance()->execute($sql, $params);    
     }
+
+    public static function getBasket() 
+    {
+        $session_id = session_id();
+        $tableName = static::getTableName();
+        $params = [
+            'session_id' => $session_id
+        ];
+        $sql = "SELECT * FROM `basket` INNER JOIN `products` WHERE `basket`.`product_id` = `products`.`id`  AND `basket`.`session_id`= :session_id";
+        return Db::getInstance()->queryAll($sql, $params);
+
+    } 
 }

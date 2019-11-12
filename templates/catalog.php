@@ -2,7 +2,7 @@
 <div class = "catalog">
 <?foreach ($catalog as $item): ?>
   <div class="catalog__item" id="<?=$item['id']?>">
-    <a href="<?='/product/item/' . $item['id']?>">
+    <a href="<?='/product/item/' . $item['id']?>/">
     <b class="nameItem" id="<?=$item['id']?>"><?=$item['name']?></b><br>
     <img id="<?=$item['id']?>" width="250" src="/img/<?=$item['image']?>" class="imgItem" alt=""></a><br>
     Цена: <?=$item['price']?><br>

@@ -20,7 +20,7 @@ document.addEventListener('click',  async (e) => {
     let items = document.querySelectorAll(".catalog__item").length;
     //console.log(items);
     let data = {items};
-    let result = await responseAPI("/product/ApiCatalog", data);
+    let result = await responseAPI("/product/ApiCatalog/", data);
     let catalog = document.querySelector(".catalog");
     catalog.innerHTML = "";
     //console.log(result);
@@ -44,7 +44,7 @@ document.addEventListener('click',  async (e) => {
     let id = e.target.id;
     let data = {id}; 
     console.log(data);
-    let result = await responseAPI("/basket/ApiAdd",data);
+    let result = await responseAPI("/basket/ApiAdd/",data);
     console.log(result);
     //document.getElementById('counter').innerHTML = result;
   }

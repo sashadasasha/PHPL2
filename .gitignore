@@ -1,2 +1,5 @@
 /vscode
 /.idea
+/vendor
+/docker
+docker-composer.yml

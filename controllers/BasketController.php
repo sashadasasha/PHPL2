@@ -7,7 +7,7 @@ class BasketController extends CoreController
 {
   public function actionItems() 
   {
-    $basket = Basket::getAll();
+    $basket = Basket::getBasket();
     echo $this->render('basket', ['basket' => $basket]);
   }
 

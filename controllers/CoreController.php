@@ -3,54 +3,51 @@
 namespace app\controllers;
 
 use app\interfaces\IController;
+use app\engine\Render;
 
-abstract class CoreController implements IController
+class CoreController implements IController
 {
   public $action;
   public $controller;
-  static public $layout = 'main';
-  static public $useLayout = true;
+  public $layout = 'main';
+  public $useLayout = true;
+  private $renderer;
  
-
-  public static function getUrl() 
+  public function __construct ()
   {
-    if (isset($_GET['url'])) {
-      $url = rtrim($_GET['url'], '/');
-      $url = filter_var($url, FILTER_SANITIZE_URL);
-      $url = explode('/', $url);
-      return $url;
-    }
+    $this->renderer = new Render();
   }
 
-  public static function actionIndex() 
+  public function getUrl() 
   {
-    echo static::render('index');
+    $url = explode('/', $_SERVER['REQUEST_URI']);
+    array_shift($url);
+    array_pop($url);
+    return $url;
+  }
+  
+
+  public function actionIndex() 
+  {
+    echo $this->render('index');
   }
 
-  public static function render($template, $params = []) 
+  public function render($template, $params = []) 
   {
-    if (static::$useLayout) {
-        return static::renderTemplate("layouts/" . static::$layout, [
-            'menu' => static::renderTemplate('menu'),
-            'content' => static::renderTemplate($template, $params)
+    if ($this->useLayout) {
+        return $this->renderTemplate("layouts/" . $this->layout, [
+            'menu' => $this->renderTemplate('menu'),
+            'content' => $this->renderTemplate($template, $params)
         ]);
     } else {
-        return static::renderTemplate($template, $params = []);
+        return $this->renderTemplate($template, $params = []);
     }
   }
-
-  public static function renderTemplate($template, $params = []) 
+  public function renderTemplate($template, $params = []) 
   {
-    ob_start();
-    extract($params);
-    $templatePath = TEMPLATES_DIR . $template . ".php";
-    if (file_exists($templatePath)) {
-        include $templatePath;
-    }
-    return ob_get_clean();
+    return $this->renderer->renderTemplate($template, $params);
   }
 
-  
   public function runAction($action = null) 
   {
     $method = "action" . ucfirst($action);
